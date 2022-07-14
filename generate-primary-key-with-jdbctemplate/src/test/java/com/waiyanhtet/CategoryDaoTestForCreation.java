@@ -14,7 +14,7 @@ import com.waiyanhtet.demo.model.Category;
 
 @TestMethodOrder(OrderAnnotation.class)
 @SpringJUnitConfig(locations = "/application.xml")
-public class CategoryDaoTest {
+public class CategoryDaoTestForCreation {
 
 	@Autowired
 	private CategoryDao dao;
@@ -27,9 +27,6 @@ public class CategoryDaoTest {
 		category.setName("Food");
 		var id = dao.createWithPrepareStatementCreator(category);
 		Assertions.assertEquals(1, id);
-
-		var data = dao.retrieve();
-		System.out.println(data);
 	}
 
 	@Test
@@ -40,9 +37,6 @@ public class CategoryDaoTest {
 		category.setName("Accessories");
 		var id = dao.createWithPrepareStatementCreatorFactory(category);
 		Assertions.assertEquals(2, id);
-
-		var data = dao.retrieve();
-		System.out.println(data);
 	}
 
 	@Test
@@ -53,9 +47,6 @@ public class CategoryDaoTest {
 		category.setName("Fashion");
 		var id = dao.createWithCreatorAndKeyHolder(category);
 		Assertions.assertEquals(3, id);
-
-		var data = dao.retrieve();
-		System.out.println(data);
 	}
 
 	@Test
@@ -66,8 +57,5 @@ public class CategoryDaoTest {
 		category.setName("Electronics");
 		var id = dao.createWithSimpleJdbcInsert(category);
 		Assertions.assertEquals(4, id);
-
-		var data = dao.retrieve();
-		System.out.println(data);
 	}
 }

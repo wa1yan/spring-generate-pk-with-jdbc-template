@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -16,7 +18,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @ComponentScan(basePackages = "com.waiyanhtet.demo.dao")
 @PropertySource(value = "sql.properties")
 public class AppConfig {
-
 	@Bean
 	public DataSource dataSource() {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -38,4 +39,8 @@ public class AppConfig {
 		return simpleJdbcInsert;
 	}
 
+	@Bean
+	public NamedParameterJdbcOperations jdbcOperation(DataSource dataSource) {
+		return new NamedParameterJdbcTemplate(dataSource);
+	}
 }
